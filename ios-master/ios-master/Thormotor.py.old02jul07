@@ -1,0 +1,124 @@
+import gtk
+import time
+import threading
+import __main__
+import helpers
+import socket
+
+DEVICENAME="Thormotor"
+
+class io_stream:
+    def __init__(self, ui_target = None):
+        self.ui_target = ui_target;
+        return
+    
+    def register(self):
+	if self.ui_target:
+	    self.topvbox = gtk.VBox(False, 0)
+	    self.ui_target.pack_start(self.topvbox, False, False, 5)
+	    self.ui_target.show_all()
+	
+	self.lock = threading.Lock()
+	try:
+	    self.lock.acquire()
+	    
+	    devname = helpers.devmap_remap("%s:dev"%(DEVICENAME))
+            assert devname, "Did not find %s in devmap"%(DEVICENAME)
+	    self.alias = helpers.devmap_remap("%s:alias"%(DEVICENAME))
+            assert self.alias, "Did not find alias for %s"%(DEVICENAME)
+	    
+	    self.server_ip = devname.split(':')[0]
+	    self.server_port = int(devname.split(':')[1])
+	finally:
+	    self.lock.release()
+        
+    def unregister(self):
+        try:
+            self.lock.acquire()
+            if self.ui_target:
+                self.topvbox.destroy()
+        finally:
+            self.lock.release()
+        return
+
+    def hooks_provides(self):
+        return ({'%s_LX'%(self.alias): self.setLX,
+                 '%s_LY'%(self.alias): self.setLY,
+                 '%s_PX'%(self.alias): self.setPX,
+                 '%s_PY'%(self.alias): self.setPY,
+                 '%s_PC'%(self.alias): self.setPC},
+		{'%s_LX'%(self.alias): self.readLX,
+                 '%s_LY'%(self.alias): self.readLY,
+                 '%s_PX'%(self.alias): self.readPX,
+                 '%s_PY'%(self.alias): self.readPY,
+                 '%s_PC'%(self.alias): self.readPC})
+
+    def setLX(self, pos):
+        return self.set('0', pos)
+
+    def setLY(self, pos):
+        return self.set('1', pos)
+    
+    def setPX(self, pos):
+        return self.set('2', pos)
+
+    def setPY(self, pos):
+        return self.set('3', pos)
+    
+    def setPC(self, pos):
+        return self.set('4', pos)
+
+    def set(self, axis, pos):
+        if (pos < 0 or pos > 24):
+            print "Value set for Thormotor %s out of range, ignoring"%(axis)
+            return
+
+        try:
+            self.lock.acquire()
+            
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            if not s:
+                raise "Error opening socket"
+            s.connect((self.server_ip, self.server_port))
+
+            s.sendall('move %s %f\n'%(axis, pos))
+            rv = s.recv(1024)
+            s.close()
+        finally:
+            self.lock.release()
+
+        return
+
+    def readLX(self):
+        return self.read('0')
+
+    def readLY(self):
+        return self.read('1')
+
+    def readPX(self):
+        return self.read('2')
+
+    def readPY(self):
+        return self.read('3')
+
+    def readPC(self):
+        return self.read('4')
+    
+    def read(self, axis):
+        try:
+            self.lock.acquire()
+            
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            if not s:
+                raise "Error opening socket"
+            s.connect((self.server_ip, self.server_port))
+
+            s.sendall('report %s\n'%axis)
+            rv = s.recv(1024)
+	    pos = float(rv[14:22])
+	    
+            s.close()
+        finally:
+            self.lock.release()
+
+	return pos

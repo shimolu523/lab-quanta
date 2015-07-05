@@ -1,0 +1,552 @@
+ReadSetValues:i:Read:MonoLasers_421_ADCVAL
+ReadSetValues:o:Set:AGfungen1_OutPut
+Scripts:SidebandScan:tree:LockOption:1:1.0
+Scripts:SidebandScan:tree:StarkSecFRQ1:1:0.435
+Scripts:SidebandScan:tree:Width:1:0.05
+Scripts:SidebandScan:tree:StarkSecFRQ3:1:0.7499
+Scripts:SidebandScan:tree:StarkSecFRQ2:1:0.6196
+Scripts:SidebandScan:tree:ScanRepeat:1:1.0
+Scripts:SidebandScan:tree:ReadoutDLY:1:0.0
+Scripts:SidebandScan:tree:ScanPoints:1:31.0
+1DScan:tree:Y2 Scaling:1:1.0
+1DScan:tree:Y1 Scaling:1:1.0
+1DScan:tree:End at:1:203.0
+1DScan:tree:Start at:1:173.0
+1DScan:tree:Steps:1:50.0
+1DScan:tree:Cycle?:1:1.0
+1DScan:tree:Pause:1:10.0
+1DScan:tree:Finish at:1:177.0
+1DScan:i:Y1 read:WS7_F2
+1DScan:i:X read:<empty>
+1DScan:i:Y2 read:WS7_F5
+1DScan:o:X set:DDS_FREQ0
+Scripts:Rabi:tree:EndT:1:12.0
+Scripts:Rabi:tree:ScanPoints:1:13.0
+Scripts:Rabi:tree:StartT:1:0.0
+Scripts:Rabi:tree:ScanRepeat:1:999.0
+Scripts:Rabi:tree:ReadoutDF:1:0.0
+Scripts:Rabi:tree:LockOption:1:0.0
+Scripts:CavityStandingWaveScan:tree:BlueLockOn:1:1.0
+Scripts:CavityStandingWaveScan:tree:IonSet:1:0.0
+Scripts:CavityStandingWaveScan:tree:IonLockOn:1:0.0
+Scripts:CavityStandingWaveScan:tree:Width:1:12.0
+Scripts:CavityStandingWaveScan:tree:ProbePower:1:10.0
+Scripts:CavityStandingWaveScan:tree:ScanRepeat:1:10.0
+Scripts:CavityStandingWaveScan:tree:CavLockOn:1:1.0
+Scripts:CavityStandingWaveScan:tree:ScanPoints:1:12.0
+Scripts:CavitySidebandScan:tree:BlueLockOn:1:5.0
+Scripts:CavitySidebandScan:tree:ProbePower:1:15.0
+Scripts:CavitySidebandScan:tree:IonSet:1:0.0
+Scripts:CavitySidebandScan:tree:IonLockOn:1:3.0
+Scripts:CavitySidebandScan:tree:StarkSecFRQ1:1:0.86586
+Scripts:CavitySidebandScan:tree:Width:1:0.3
+Scripts:CavitySidebandScan:tree:StarkSecFRQ3:1:0.0
+Scripts:CavitySidebandScan:tree:StarkSecFRQ2:1:0.0
+Scripts:CavitySidebandScan:tree:ScanRepeat:1:1.0
+Scripts:CavitySidebandScan:tree:CavLockOn:1:10.0
+Scripts:CavitySidebandScan:tree:ScanPoints:1:10.0
+TimeDepScan:tree:Y2 Scaling:1:1.0
+TimeDepScan:tree:Hysteresis top point:1:0.0
+TimeDepScan:tree:Measure interval:1:0.1
+TimeDepScan:tree:Hysteresis bottom point wait:1:0.0
+TimeDepScan:tree:Hysteresis top point wait:1:0.0
+TimeDepScan:tree:Y1 Scaling:1:1.0
+TimeDepScan:tree:Measure time:1:9999999999.0
+TimeDepScan:tree:Pause:1:0.0
+TimeDepScan:tree:Finish at:1:0.0
+TimeDepScan:tree:Hysteresis bottom point:1:0.0
+TimeDepScan:tree:Measure point:1:0.0
+TimeDepScan:i:Y1 Read:IonPhotonCounter_COUNT
+TimeDepScan:i:Y2 Read:<empty>
+TimeDepScan:o:X Set:<empty>
+Scripts:CavityTransmissionScan:tree:BlueLockOn:1:1.0
+Scripts:CavityTransmissionScan:tree:LockOption:1:0.0
+Scripts:CavityTransmissionScan:tree:IonSet:1:0.0
+Scripts:CavityTransmissionScan:tree:IonLockOn:1:0.0
+Scripts:CavityTransmissionScan:tree:Width:1:2.0
+Scripts:CavityTransmissionScan:tree:ProbePower:1:3.8
+Scripts:CavityTransmissionScan:tree:WithSC:1:0.0
+Scripts:CavityTransmissionScan:tree:ScanRepeat:1:1.0
+Scripts:CavityTransmissionScan:tree:CavLockOn:1:0.0
+Scripts:CavityTransmissionScan:tree:ScanPoints:1:100.0
+Scripts:Ramsey:tree:EndT:1:50.0
+Scripts:Ramsey:tree:LockOption:1:1.0
+Scripts:Ramsey:tree:RamseyPh:1:45.0
+Scripts:Ramsey:tree:StartT:1:0.0
+Scripts:Ramsey:tree:OnSideband:1:0.0
+Scripts:Ramsey:tree:ScanRepeat:1:3.0
+Scripts:Ramsey:tree:ReadoutDF:1:0.0
+Scripts:Ramsey:tree:ScanPoints:1:50.0
+Scripts:Heating:tree:EndT:1:40.0
+Scripts:Heating:tree:SecFRQ:1:0.4335
+Scripts:Heating:tree:ScanPoints:1:21.0
+Scripts:Heating:tree:StartT:1:0.0
+Scripts:Heating:tree:ScanRepeat:1:3.0
+Scripts:Heating:tree:LockOption:1:0.0
+1DScan:tree:Baseline:1:0.0
+1DScan:tree:Pulse Width:1:1.0
+Scripts:CavityCoolRabi:tree:ProbeLockOn:1:0.0
+Scripts:CavityCoolRabi:tree:EndT:1:50.0
+Scripts:CavityCoolRabi:tree:LockOption:1:0.0
+Scripts:CavityCoolRabi:tree:IonSet:1:0.0
+Scripts:CavityCoolRabi:tree:IonLockOn:1:0.0
+Scripts:CavityCoolRabi:tree:StartT:1:0.0
+Scripts:CavityCoolRabi:tree:ProbeSet:1:-1.37
+Scripts:CavityCoolRabi:tree:CavLockOn:1:14.0
+Scripts:CavityCoolRabi:tree:ScanRepeat:1:1.0
+Scripts:CavityCoolRabi:tree:CavityOnDF:1:0.867
+Scripts:CavityCoolRabi:tree:ReadoutDF:1:0.0
+Scripts:CavityCoolRabi:tree:ScanPoints:1:50.0
+Stab1DScan:tree:S start at:1:9.73
+Stab1DScan:tree:Y Scaling:1:1.0
+Stab1DScan:tree:I gain:1:-0.001
+Stab1DScan:tree:Stabilize at:1:6.0
+Stab1DScan:tree:X end at:1:199.2
+Stab1DScan:tree:Pause:1:1.0
+Stab1DScan:tree:Steps:1:999999999.0
+Stab1DScan:tree:Cycle?:1:1.0
+Stab1DScan:tree:X start at:1:193.0
+Stab1DScan:tree:Finish at:1:196.8
+Stab1DScan:i:X read:MonoLasers_421
+Stab1DScan:i:S read:IonPhotonCounter_COUNT
+Stab1DScan:i:Y read:IonPhotonCounter_MMAMP
+Stab1DScan:o:X set:<empty>
+Stab1DScan:o:S set:MonoLasers_421
+Scripts:CavityCoolRabiDataRun:tree:ReadoutMode:1:1.0
+Scripts:CavityCoolRabiDataRun:tree:us_CCtime:1:1500.0
+Scripts:CavityCoolRabi2:tree:ProbeLockOn:1:7.0
+Scripts:CavityCoolRabi2:tree:EndT:1:50.0
+Scripts:CavityCoolRabi2:tree:LockOption:1:1.0
+Scripts:CavityCoolRabi2:tree:IonSet:1:2.0
+Scripts:CavityCoolRabi2:tree:IonLockOn:1:10.0
+Scripts:CavityCoolRabi2:tree:StartT:1:0.0
+Scripts:CavityCoolRabi2:tree:ProbeSet:1:2.9
+Scripts:CavityCoolRabi2:tree:CavLockOn:1:14.0
+Scripts:CavityCoolRabi2:tree:ScanRepeat:1:3.0
+Scripts:CavityCoolRabi2:tree:CavityOnDF:1:0.871
+Scripts:CavityCoolRabi2:tree:ReadoutDF:1:0.0
+Scripts:CavityCoolRabi2:tree:ScanPoints:1:50.0
+TimeDepScan4:tree:Y2 Scaling:1:1.0
+TimeDepScan4:tree:Hysteresis top point:1:0.0
+TimeDepScan4:tree:Measure interval:1:0.1
+TimeDepScan4:tree:Hysteresis bottom point wait:1:0.0
+TimeDepScan4:tree:Hysteresis top point wait:1:0.0
+TimeDepScan4:tree:Y1 Scaling:1:1.0
+TimeDepScan4:tree:Measure time:1:60.0
+TimeDepScan4:tree:Y3 Scaling:1:1.0
+TimeDepScan4:tree:Pause:1:0.05
+TimeDepScan4:tree:Finish at:1:0.0
+TimeDepScan4:tree:Y4 Scaling:1:1.0
+TimeDepScan4:tree:Hysteresis bottom point:1:0.0
+TimeDepScan4:tree:Measure point:1:0.0
+TimeDepScan4:i:Y1 Read:IonPhotonCounter_COUNT
+TimeDepScan4:i:Y3 Read:<empty>
+TimeDepScan4:i:Y2 Read:<empty>
+TimeDepScan4:i:Y4 Read:<empty>
+TimeDepScan4:o:X Set:<empty>
+Scripts:testScript:tree:ScanRepeat:1:100.0
+Scripts:testScript:tree:LockOption:1:0.0
+Scripts:testScript:tree:ScanPoints:1:50.0
+Scripts:testScript:tree:PARAMETERS:1:0.0
+PIDlock:tree:Start at:1:0.0
+PIDlock:tree:Lower Bound:1:-10.0
+PIDlock:tree:Lower Read Cutoff:1:1.0
+PIDlock:tree:P Gain:1:-200.0
+PIDlock:tree:I Gain:1:0.1
+PIDlock:tree:Setpoint:1:0.0
+PIDlock:tree:Upper Bound:1:10.0
+PIDlock:tree:Upper Read Cutoff:1:710.965
+PIDlock:tree:Pause:1:1.0
+PIDlock:tree:Read Scaling:1:1.0
+PIDlock:i:Read:<empty>
+PIDlock:o:Set:<empty>
+Scripts:OpticalPumpingExperiment:tree:ScanRepeat:1:0.0
+Scripts:OpticalPumpingExperiment:tree:BlueLockOn:1:0.0
+Scripts:CavityStandingWaveScan2:tree:BlueLockOn:1:1.0
+Scripts:CavityStandingWaveScan2:tree:IonSet:1:0.0
+Scripts:CavityStandingWaveScan2:tree:IonLockOn:1:0.0
+Scripts:CavityStandingWaveScan2:tree:Width:1:18.0
+Scripts:CavityStandingWaveScan2:tree:ProbeSet:1:0.0
+Scripts:CavityStandingWaveScan2:tree:ScanRepeat:1:10.0
+Scripts:CavityStandingWaveScan2:tree:CavLockOn:1:1.0
+Scripts:CavityStandingWaveScan2:tree:ProbeLockOn:1:7.0
+Scripts:CavityStandingWaveScan2:tree:ScanPoints:1:18.0
+2DScan:tree:Z Scaling:1:1.0
+2DScan:tree:Finish Y at:1:3.24
+2DScan:tree:Start y at:1:2.0
+2DScan:tree:Steps in y dir:1:30.0
+2DScan:tree:End x at:1:7.0
+2DScan:tree:Pause Y:1:1.0
+2DScan:tree:Pause X:1:1.0
+2DScan:tree:Finish X at:1:4.45
+2DScan:tree:Steps in x dir:1:30.0
+2DScan:tree:End y at:1:5.0
+2DScan:tree:Start x at:1:4.0
+2DScan:i:Z read:<empty>
+2DScan:i:X read:<empty>
+2DScan:i:Y read:<empty>
+2DScan:o:Y set:<empty>
+2DScan:o:X set:<empty>
+Scripts:PMTlog:tree:Ntrials:1:50.0
+Scripts:PMTlog:tree:ms_bintime:1:6.0
+Scripts:PMTlog:tree:A_redon:1:30.0
+Scripts:PMTlog:tree:f_redon:1:192.0
+AutoLoad:tree:Egun V:1:2.5
+AutoLoad:tree:Endcaps V:1:20.0
+AutoLoad:tree:Oven time:1:120.0
+AutoLoad:tree:Egun bias:1:-20.0
+AutoLoad:tree:RF frq:1:6.0
+AutoLoad:tree:RF amp:1:6.0
+AutoLoad:tree:Oven I:1:4.0
+AutoLoad:tree:Egun time:1:10.0
+AutoLoad:o:Oven I set:<empty>
+AutoLoad:o:RFamp set:<empty>
+AutoLoad:o:Endcap V set:<empty>
+AutoLoad:o:Egun bias set:<empty>
+AutoLoad:o:RFfrq set:<empty>
+AutoLoad:o:Egun V set:<empty>
+Scripts:CavityStandingWaveScan3:tree:BlueLockOn:1:1.0
+Scripts:CavityStandingWaveScan3:tree:IonSet:1:0.0
+Scripts:CavityStandingWaveScan3:tree:IonLockOn:1:0.0
+Scripts:CavityStandingWaveScan3:tree:Width:1:19.0
+Scripts:CavityStandingWaveScan3:tree:ProbePower:1:5.0
+Scripts:CavityStandingWaveScan3:tree:ScanRepeat:1:100.0
+Scripts:CavityStandingWaveScan3:tree:CavLockOn:1:1.0
+Scripts:CavityStandingWaveScan3:tree:ScanPoints:1:19.0
+LinFit:tree:Y Scaling:1:1.0
+LinFit:tree:End at:1:1.0
+LinFit:tree:Start at:1:0.0
+LinFit:tree:Steps:1:1000.0
+LinFit:tree:Pause:1:0.01
+LinFit:tree:Finish at:1:0.0
+LinFit:i:X read:<empty>
+LinFit:i:Y read:<empty>
+LinFit:o:X set:<empty>
+Scripts:DopplerCoolRabi:tree:ProbeLockOn:1:0.0
+Scripts:DopplerCoolRabi:tree:EndT:1:200.0
+Scripts:DopplerCoolRabi:tree:LockOption:1:1.0
+Scripts:DopplerCoolRabi:tree:IonSet:1:0.0
+Scripts:DopplerCoolRabi:tree:IonLockOn:1:0.0
+Scripts:DopplerCoolRabi:tree:StartT:1:0.0
+Scripts:DopplerCoolRabi:tree:ProbeSet:1:0.0
+Scripts:DopplerCoolRabi:tree:CavLockOn:1:0.0
+Scripts:DopplerCoolRabi:tree:ScanRepeat:1:3.0
+Scripts:DopplerCoolRabi:tree:CavityOnDF:1:0.0
+Scripts:DopplerCoolRabi:tree:ReadoutDF:1:0.0
+Scripts:DopplerCoolRabi:tree:ScanPoints:1:100.0
+Scripts:DopplerCoolDataRun:tree:ReadoutMode:1:1.0
+Scripts:DopplerCoolDataRun:tree:us_CCtime:1:0.0
+Scripts:CavityStandingWaveScan3:tree:SBcool:1:0.0
+Scripts:DopplerCoolDataRun:tree:EndT:1:150.0
+Scripts:DopplerCoolDataRun:tree:Lockoption:1:1.0
+Scripts:DopplerCoolDataRun:tree:StartT:1:0.0
+Scripts:DopplerCoolDataRun:tree:SCloops:1:0.0
+Scripts:DopplerCoolDataRun:tree:us_DCtime:1:2000.0
+Scripts:DopplerCoolDataRun:tree:ScanRepeat:1:1.0
+Scripts:DopplerCoolDataRun:tree:ScanPoints:1:312.0
+Scripts:DopplerCoolDataRun:tree:LockOption:1:1.0
+Scripts:DopplerCoolRabi:tree:StabCount:1:60000.0
+Scripts:CavityStandingWaveScan4:tree:BlueLockOn:1:1.0
+Scripts:CavityStandingWaveScan4:tree:SBcool:1:0.0
+Scripts:CavityStandingWaveScan4:tree:EndV:1:12.0
+Scripts:CavityStandingWaveScan4:tree:IonSet:1:1.0
+Scripts:CavityStandingWaveScan4:tree:StartV:1:0.0
+Scripts:CavityStandingWaveScan4:tree:IonLockOn:1:3.0
+Scripts:CavityStandingWaveScan4:tree:ProbePower:1:7.0
+Scripts:CavityStandingWaveScan4:tree:ScanRepeat:1:999.0
+Scripts:CavityStandingWaveScan4:tree:CavLockOn:1:1.0
+Scripts:CavityStandingWaveScan4:tree:ScanPoints:1:12.0
+Scripts:MicroMotionMinimization:tree:acc:1:0.0006
+Scripts:MicroMotionMinimization:tree:delta:1:0.003
+Scripts:MicroMotionMinimization:tree:IntTime:1:1500.0
+Scripts:CavityResonanceScan:tree:ScanRepeat:1:99.0
+Scripts:CavityResonanceScan:tree:ScanPoints:1:100.0
+Scripts:CavityResonanceScan:tree:ProbePower:1:3.0
+Scripts:CavityResonanceScan:tree:StartF:1:230.5
+Scripts:CavityResonanceScan:tree:EndF:1:232.2
+Scripts:674scan:tree:ScanRepeat:1:1.0
+Scripts:674scan:tree:ScanPoints:1:1000.0
+Scripts:674scan:tree:ProbePower:1:0.0
+Scripts:674scan:tree:StartF:1:195.0
+Scripts:674scan:tree:EndF:1:200.0
+Scripts:674scan:tree:SCloops:1:0.0
+Scripts:674scan:tree:us_RedTime:1:30.0
+Scripts:674scan:tree:BlueLockOn:1:1.0
+Scripts:SidebandScan:tree:SCloops:1:75.0
+Scripts:Rabi:tree:SCloops:1:0.0
+Scripts:AutoloadIon:tree:Freq422:1:710.96305
+Scripts:CavityCoolRabi3:tree:ProbeLockOn:1:1.0
+Scripts:CavityCoolRabi3:tree:EndT:1:50.0
+Scripts:CavityCoolRabi3:tree:LockOption:1:5.0
+Scripts:CavityCoolRabi3:tree:IonSet:1:2.0
+Scripts:CavityCoolRabi3:tree:IonLockOn:1:0.0
+Scripts:CavityCoolRabi3:tree:StartT:1:0.0
+Scripts:CavityCoolRabi3:tree:ProbeSet:1:-2.5
+Scripts:CavityCoolRabi3:tree:CavLockOn:1:7.0
+Scripts:CavityCoolRabi3:tree:ScanRepeat:1:3.0
+Scripts:CavityCoolRabi3:tree:CavityOnDF:1:870.0
+Scripts:CavityCoolRabi3:tree:ReadoutDF:1:0.0
+Scripts:CavityCoolRabi3:tree:ScanPoints:1:50.0
+Scripts:CavityCoolRabiDataRun:tree:ScanPoints:1:50.0
+Scripts:CavityCoolRabiDataRun:tree:IonSet:1:2.0
+Scripts:CavityCoolRabiDataRun:tree:IonLockOn:1:0.0
+Scripts:CavityCoolRabiDataRun:tree:EndT_SB:1:80.0
+Scripts:CavityCoolRabiDataRun:tree:ProbeSet:1:9.8
+Scripts:CavityCoolRabiDataRun:tree:ScanRepeat:1:3.0
+Scripts:CavityCoolRabiDataRun:tree:CavLockOn:1:5.0
+Scripts:CavityCoolRabiDataRun:tree:ProbeLockOn:1:7.0
+Scripts:CavityCoolRabiDataRun:tree:LockOption:1:1.0
+Scripts:LazyPhysicist:tree:MMMinimize:1:1.0
+Scripts:LazyPhysicist:tree:LoadIon:1:1.0
+Scripts:LazyPhysicist:tree:Scan422:1:1.0
+Scripts:LazyPhysicist:tree:CavLockCheckOn:1:0.0
+Scripts:422scan:tree:DDSFREQ:1:231.0
+Scripts:422scan:tree:StartCav:1:8.0
+Scripts:422scan:tree:DDSAMP:1:60.0
+Scripts:422scan:tree:ScanRepeat:1:1.0
+Scripts:422scan:tree:EndCav:1:7.4
+Scripts:422scan:tree:ScanPoints:1:100.0
+Scripts:422scan:tree:FinishCav:1:7.9
+Scripts:AutoloadIon:tree:Threshold:1:3000.0
+Scripts:AutoloadIon:tree:IntTime:1:1500.0
+Scripts:LazyPhysicist:tree:DoScan422:1:1.0
+Scripts:Scan422:tree:DDSFREQ:1:231.0
+Scripts:Scan422:tree:StartCav:1:7.1
+Scripts:Scan422:tree:FinishCav:1:7.1
+Scripts:Scan422:tree:DDSAMP:1:60.0
+Scripts:Scan422:tree:ScanRepeat:1:1.0
+Scripts:Scan422:tree:EndCav:1:6.5
+Scripts:Scan422:tree:ScanPoints:1:100.0
+Scripts:LazyPhysicist:tree:ProbeLockOn:1:0.0
+Scripts:Scan674:tree:BlueLockOn:1:1.0
+Scripts:Scan674:tree:StartF:1:195.0
+Scripts:Scan674:tree:SCloops:1:0.0
+Scripts:Scan674:tree:EndF:1:200.0
+Scripts:Scan674:tree:ScanRepeat:1:1.0
+Scripts:Scan674:tree:us_RedTime:1:30.0
+Scripts:Scan674:tree:ScanPoints:1:1000.0
+Scripts:LazyPhysicist:tree:DoScan674:1:1.0
+Scripts:LazyPhysicist:tree:DoScan1092:1:0.0
+Scripts:LazyPhysicist:tree:DoRabiLong:1:1.0
+Scripts:LazyPhysicist:tree:DoRabiShort:1:1.0
+Scripts:LazyPhysicist:tree:DoCavitySidebandScan:1:0.0
+Scripts:LazyPhysicist:tree:DoCavityResonanceScan:1:0.0
+Scripts:LazyPhysicist:tree:DoSidebandScan:1:1.0
+Scripts:LazyPhysicist:tree:DoCavityCoolingDataRun:1:0.0
+Scripts:LazyPhysicist:tree:DoMicroMotionMiniMization:1:0.0
+Scripts:LazyPhysicist:tree:DoCavityStandingWaveScan:1:0.0
+Scripts:Scan1092:tree:DDSFREQ:1:0.0
+Scripts:Scan1092:tree:StartCav:1:1.45
+Scripts:Scan1092:tree:FinishCav:1:1.55
+Scripts:Scan1092:tree:DDSAMP:1:0.0
+Scripts:Scan1092:tree:ScanRepeat:1:1.0
+Scripts:Scan1092:tree:EndCav:1:1.65
+Scripts:Scan1092:tree:ScanPoints:1:100.0
+Scripts:LazyPhysicist:tree:DoFitAll:1:1.0
+Scripts:CavityStandingWaveScan4:tree:ProbeSet:1:3.65
+Scripts:CavityStandingWaveScan4:tree:ProbeLockOn:1:1.0
+Scripts:CavityCoolRabi_0deg:tree:ProbeLockOn:1:0.0
+Scripts:CavityCoolRabi_0deg:tree:EndT:1:50.0
+Scripts:CavityCoolRabi_0deg:tree:LockOption:1:1.0
+Scripts:CavityCoolRabi_0deg:tree:IonSet:1:0.0
+Scripts:CavityCoolRabi_0deg:tree:IonLockOn:1:0.0
+Scripts:CavityCoolRabi_0deg:tree:StartT:1:0.0
+Scripts:CavityCoolRabi_0deg:tree:ProbeSet:1:0.0
+Scripts:CavityCoolRabi_0deg:tree:CavLockOn:1:1.0
+Scripts:CavityCoolRabi_0deg:tree:ScanRepeat:1:3.0
+Scripts:CavityCoolRabi_0deg:tree:CavityOnDF:1:0.867
+Scripts:CavityCoolRabi_0deg:tree:ReadoutDF:1:0.0
+Scripts:CavityCoolRabi_0deg:tree:ScanPoints:1:50.0
+Scripts:CavitySidebandScan_0deg:tree:BlueLockOn:1:0.0
+Scripts:CavitySidebandScan_0deg:tree:ProbePower:1:0.0
+Scripts:CavitySidebandScan_0deg:tree:IonSet:1:0.0
+Scripts:CavitySidebandScan_0deg:tree:IonLockOn:1:0.0
+Scripts:CavitySidebandScan_0deg:tree:StarkSecFRQ1:1:0.0
+Scripts:CavitySidebandScan_0deg:tree:Width:1:0.0
+Scripts:CavitySidebandScan_0deg:tree:StarkSecFRQ3:1:0.0
+Scripts:CavitySidebandScan_0deg:tree:StarkSecFRQ2:1:0.0
+Scripts:CavitySidebandScan_0deg:tree:ScanRepeat:1:0.0
+Scripts:CavitySidebandScan_0deg:tree:CavLockOn:1:0.0
+Scripts:CavitySidebandScan_0deg:tree:ScanPoints:1:0.0
+Scripts:CavityCoolRabiDataRun_0deg:tree:ScanPoints:1:50.0
+Scripts:CavityCoolRabiDataRun_0deg:tree:IonSet:1:2.0
+Scripts:CavityCoolRabiDataRun_0deg:tree:IonLockOn:1:0.0
+Scripts:CavityCoolRabiDataRun_0deg:tree:EndT_SB:1:80.0
+Scripts:CavityCoolRabiDataRun_0deg:tree:ReadoutMode:1:1.0
+Scripts:CavityCoolRabiDataRun_0deg:tree:ProbeSet:1:9.8
+Scripts:CavityCoolRabiDataRun_0deg:tree:ScanRepeat:1:3.0
+Scripts:CavityCoolRabiDataRun_0deg:tree:CavLockOn:1:5.0
+Scripts:CavityCoolRabiDataRun_0deg:tree:ProbeLockOn:1:7.0
+Scripts:CavityCoolRabiDataRun_0deg:tree:LockOption:1:1.0
+Scripts:LazyPhysicist:tree:BlueLockOn:1:0.0
+Scripts:CavityStandingWaveScan_0deg:tree:BlueLockOn:1:13.0
+Scripts:CavityStandingWaveScan_0deg:tree:SBcool:1:0.0
+Scripts:CavityStandingWaveScan_0deg:tree:EndV:1:12.0
+Scripts:CavityStandingWaveScan_0deg:tree:IonSet:1:1.0
+Scripts:CavityStandingWaveScan_0deg:tree:StartV:1:0.0
+Scripts:CavityStandingWaveScan_0deg:tree:IonLockOn:1:3.0
+Scripts:CavityStandingWaveScan_0deg:tree:ProbeSet:1:5.5
+Scripts:CavityStandingWaveScan_0deg:tree:ScanRepeat:1:999.0
+Scripts:CavityStandingWaveScan_0deg:tree:CavLockOn:1:13.0
+Scripts:CavityStandingWaveScan_0deg:tree:ProbeLockOn:1:1.0
+Scripts:CavityStandingWaveScan_0deg:tree:ScanPoints:1:26.0
+Scripts:LazyPhysicist:tree:DoBlogAll:1:1.0
+Scripts:Heating:tree:CavLockCheck:1:0.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler:tree:ScanPoints:1:50.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler:tree:IonSet:1:1.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler:tree:IonLockOn:1:3.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler:tree:EndT_SB:1:80.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler:tree:ReadoutMode:1:1.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler:tree:ProbeSet:1:5.5
+Scripts:CavityCoolRabiDataRun_0deg_Doppler:tree:ScanRepeat:1:1.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler:tree:CavLockOn:1:5.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler:tree:ProbeLockOn:1:7.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler:tree:LockOption:1:1.0
+Scripts:CavityCoolRabi_0deg_Doppler:tree:ProbeLockOn:1:7.0
+Scripts:CavityCoolRabi_0deg_Doppler:tree:EndT:1:80.0
+Scripts:CavityCoolRabi_0deg_Doppler:tree:LockOption:1:1.0
+Scripts:CavityCoolRabi_0deg_Doppler:tree:IonSet:1:2.0
+Scripts:CavityCoolRabi_0deg_Doppler:tree:IonLockOn:1:0.0
+Scripts:CavityCoolRabi_0deg_Doppler:tree:StartT:1:0.0
+Scripts:CavityCoolRabi_0deg_Doppler:tree:ProbeSet:1:2.8
+Scripts:CavityCoolRabi_0deg_Doppler:tree:CavLockOn:1:5.0
+Scripts:CavityCoolRabi_0deg_Doppler:tree:ScanRepeat:1:3.0
+Scripts:CavityCoolRabi_0deg_Doppler:tree:CavityOnDF:1:870.0
+Scripts:CavityCoolRabi_0deg_Doppler:tree:ReadoutDF:1:0.435
+Scripts:CavityCoolRabi_0deg_Doppler:tree:ScanPoints:1:50.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler_SteadyState:tree:ScanPoints:1:50.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler_SteadyState:tree:IonSet:1:2.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler_SteadyState:tree:IonLockOn:1:0.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler_SteadyState:tree:EndT_SB:1:80.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler_SteadyState:tree:ReadoutMode:1:1.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler_SteadyState:tree:ProbeSet:1:0.65
+Scripts:CavityCoolRabiDataRun_0deg_Doppler_SteadyState:tree:ScanRepeat:1:3.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler_SteadyState:tree:CavLockOn:1:5.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler_SteadyState:tree:ProbeLockOn:1:7.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler_SteadyState:tree:LockOption:1:1.0
+Scripts:LazyPhysicist:tree:DoOptimize1092:1:1.0
+Scripts:twoDMicroMotionScan:tree:DDSFREQ:1:0.0
+Scripts:twoDMicroMotionScan:tree:StartCav:1:0.0
+Scripts:twoDMicroMotionScan:tree:FinishCav:1:0.0
+Scripts:twoDMicroMotionScan:tree:DDSAMP:1:0.0
+Scripts:twoDMicroMotionScan:tree:ScanRepeat:1:0.0
+Scripts:twoDMicroMotionScan:tree:EndCav:1:0.0
+Scripts:twoDMicroMotionScan:tree:ScanPoints:1:0.0
+Scripts:twoDMicroMotionScan:tree:StartX:1:3.2
+Scripts:twoDMicroMotionScan:tree:StartY:1:2.8
+Scripts:twoDMicroMotionScan:tree:EndY:1:3.4
+Scripts:twoDMicroMotionScan:tree:EndX:1:3.6
+Scripts:twoDMicroMotionScan:tree:StepsY:1:30.0
+Scripts:twoDMicroMotionScan:tree:StepsX:1:30.0
+Scripts:twoDMicroMotionScan:tree:FinishX:1:3.4394
+Scripts:twoDMicroMotionScan:tree:FinishY:1:3.0877
+Scripts:twoDMicroMotionScan:tree:Pause:1:1.0
+Scripts:MicroMotionMinimization:tree:Beam (degree):1:45.0
+Scripts:twoDMicroMotionScan:tree:Beam:1:45.0
+Scripts:LazyPhysicist:tree:BlueLockLoop:1:0.0
+Scripts:CavityCoolRabiDataRun_SBscan:tree:ScanPoints:1:50.0
+Scripts:CavityCoolRabiDataRun_SBscan:tree:IonSet:1:1.0
+Scripts:CavityCoolRabiDataRun_SBscan:tree:IonLockOn:1:5.0
+Scripts:CavityCoolRabiDataRun_SBscan:tree:EndT_SB:1:80.0
+Scripts:CavityCoolRabiDataRun_SBscan:tree:ReadoutMode:1:1.0
+Scripts:CavityCoolRabiDataRun_SBscan:tree:ProbeSet:1:0.03
+Scripts:CavityCoolRabiDataRun_SBscan:tree:ScanRepeat:1:3.0
+Scripts:CavityCoolRabiDataRun_SBscan:tree:CavLockOn:1:5.0
+Scripts:CavityCoolRabiDataRun_SBscan:tree:ProbeLockOn:1:5.0
+Scripts:CavityCoolRabiDataRun_SBscan:tree:LockOption:1:1.0
+RecentIOs:E3633A AG33250ws1 AG33250ws2 E3631A5 CavityPhotonCounter IonPhotonCounter E3631A4 tek2daq AudioAlert DDScon E3631A2 E3631A3 WS7 E3631A1 DMM2 MonoLasers PIShutter
+Scripts:CavityCoolRabiDataRun_SBscan_90deg:tree:ScanPoints:1:50.0
+Scripts:CavityCoolRabiDataRun_SBscan_90deg:tree:IonSet:1:2.0
+Scripts:CavityCoolRabiDataRun_SBscan_90deg:tree:IonLockOn:1:0.0
+Scripts:CavityCoolRabiDataRun_SBscan_90deg:tree:EndT_SB:1:80.0
+Scripts:CavityCoolRabiDataRun_SBscan_90deg:tree:ReadoutMode:1:1.0
+Scripts:CavityCoolRabiDataRun_SBscan_90deg:tree:ProbeSet:1:3.3
+Scripts:CavityCoolRabiDataRun_SBscan_90deg:tree:ScanRepeat:1:3.0
+Scripts:CavityCoolRabiDataRun_SBscan_90deg:tree:CavLockOn:1:5.0
+Scripts:CavityCoolRabiDataRun_SBscan_90deg:tree:ProbeLockOn:1:7.7
+Scripts:CavityCoolRabiDataRun_SBscan_90deg:tree:LockOption:1:1.0
+Scripts:CavityCoolRabiDataRun_0deg_IONPOS:tree:ScanPoints:1:50.0
+Scripts:CavityCoolRabiDataRun_0deg_IONPOS:tree:IonSet:1:0.0
+Scripts:CavityCoolRabiDataRun_0deg_IONPOS:tree:IonLockOn:1:3.0
+Scripts:CavityCoolRabiDataRun_0deg_IONPOS:tree:EndT_SB:1:80.0
+Scripts:CavityCoolRabiDataRun_0deg_IONPOS:tree:ReadoutMode:1:1.0
+Scripts:CavityCoolRabiDataRun_0deg_IONPOS:tree:ProbeSet:1:0.03
+Scripts:CavityCoolRabiDataRun_0deg_IONPOS:tree:ScanRepeat:1:3.0
+Scripts:CavityCoolRabiDataRun_0deg_IONPOS:tree:CavLockOn:1:5.0
+Scripts:CavityCoolRabiDataRun_0deg_IONPOS:tree:ProbeLockOn:1:7.0
+Scripts:CavityCoolRabiDataRun_0deg_IONPOS:tree:LockOption:1:1.0
+Scripts:CavityCoolRabiDataRun_0deg_Doppler:tree:ProbeSet_SB:1:12.0
+Scripts:CavityCoolRabi_0deg_Doppler:tree:ProbeSet_SB:1:0.117
+Scripts:CavityCoolRabiDataRun_0deg_IONPOS:tree:ProbeSet_SB:1:4.7
+Scripts:CavityCoolRabiDataRun_SBscan:tree:ProbeSet-SB:1:4.7
+Scripts:CavityCoolRabiDataRun_SBscan:tree:ProbeSet_SB:1:4.47
+Scripts:CavityCoolRabi3D:tree:ProbeLockOn:1:7.0
+Scripts:CavityCoolRabi3D:tree:EndT:1:80.0
+Scripts:CavityCoolRabi3D:tree:LockOption:1:1.0
+Scripts:CavityCoolRabi3D:tree:IonSet:1:1.0
+Scripts:CavityCoolRabi3D:tree:IonLockOn:1:3.0
+Scripts:CavityCoolRabi3D:tree:StartT:1:0.0
+Scripts:CavityCoolRabi3D:tree:ProbeSet:1:0.08
+Scripts:CavityCoolRabi3D:tree:CavLockOn:1:5.0
+Scripts:CavityCoolRabi3D:tree:ScanRepeat:1:3.0
+Scripts:CavityCoolRabi3D:tree:CavityOnDF:1:0.0
+Scripts:CavityCoolRabi3D:tree:ReadoutDF:1:0.43293
+Scripts:CavityCoolRabi3D:tree:ScanPoints:1:50.0
+Scripts:CavityCoolRabi3D:tree:ProbeSet_SB:1:3.3
+Scripts:CavityCoolRabiDataRun3D:tree:ScanPoints:1:50.0
+Scripts:CavityCoolRabiDataRun3D:tree:IonSet:1:1.0
+Scripts:CavityCoolRabiDataRun3D:tree:IonLockOn:1:3.0
+Scripts:CavityCoolRabiDataRun3D:tree:EndT_SB:1:80.0
+Scripts:CavityCoolRabiDataRun3D:tree:ReadoutMode:1:0.0
+Scripts:CavityCoolRabiDataRun3D:tree:ProbeSet:1:0.08
+Scripts:CavityCoolRabiDataRun3D:tree:ScanRepeat:1:3.0
+Scripts:CavityCoolRabiDataRun3D:tree:CavLockOn:1:5.0
+Scripts:CavityCoolRabiDataRun3D:tree:ProbeLockOn:1:7.0
+Scripts:CavityCoolRabiDataRun3D:tree:LockOption:1:1.0
+Scripts:CavityCoolRabiDataRun3D:tree:ProbeSet_SB:1:3.3
+Scripts:CavityCoolRabiDataRun_0deg:tree:ProbeSet_SB:1:0.0
+Scripts:CavityCoolRabiDataRun3D:tree:CCloops:1:100.0
+Scripts:CavityCoolRabi_0deg_IONPOS:tree:ProbeLockOn:1:0.0
+Scripts:CavityCoolRabi_0deg_IONPOS:tree:EndT:1:0.0
+Scripts:CavityCoolRabi_0deg_IONPOS:tree:LockOption:1:0.0
+Scripts:CavityCoolRabi_0deg_IONPOS:tree:IonSet:1:0.0
+Scripts:CavityCoolRabi_0deg_IONPOS:tree:IonLockOn:1:0.0
+Scripts:CavityCoolRabi_0deg_IONPOS:tree:StartT:1:0.0
+Scripts:CavityCoolRabi_0deg_IONPOS:tree:IonPosition:1:-0.125
+Scripts:CavityCoolRabi_0deg_IONPOS:tree:ProbeSet:1:0.0
+Scripts:CavityCoolRabi_0deg_IONPOS:tree:CavLockOn:1:0.0
+Scripts:CavityCoolRabi_0deg_IONPOS:tree:ScanRepeat:1:0.0
+Scripts:CavityCoolRabi_0deg_IONPOS:tree:CavityOnDF:1:0.0
+Scripts:CavityCoolRabi_0deg_IONPOS:tree:ReadoutDF:1:0.0
+Scripts:CavityCoolRabi_0deg_IONPOS:tree:ScanPoints:1:0.0
+Scripts:CavityCoolRabi_0deg_IONPOS:tree:ProbeSet_SB:1:0.0
+Scripts:AutoloadIon-Pvst:tree:Threshold:1:5000.0
+Scripts:AutoloadIon-Pvst:tree:Freq422:1:710.96305
+Scripts:AutoloadIon-Pvst:tree:IntTime:1:1000.0
+Scripts:AutoloadIon-Pvst:tree:OvenTime:1:5.0
+Scripts:AutoloadIon-Pvst:tree:WaitTime:1:5.0
+Scripts:AutoloadIon-PvstDataRun:tree:NumberOfRepeats:1:5.0
+Scripts:AutoloadIon-PvstDataRun:tree:NumberOfOvenTimes:1:3.0
+Scripts:AutoloadIon-PvstDataRun:tree:OvenTimeStart:1:92.0
+Scripts:AutoloadIon-PvstDataRun:tree:Waittime:1:60.0
+Scripts:AutoloadIon-PvstDataRun:tree:Threshold:1:1500.0
+Scripts:AutoloadIon-PvstDataRun:tree:OvenTimeEnd:1:105.0
+Scripts:AutoloadIon-Pvst:tree:OvenCurrent:1:2.8
+Scripts:AutoloadIon-PvstDataRun:tree:OvenCurrent:1:2.8
+Scripts:AutoloadIon-Pvslt:tree:LoadingTime:1:5.0
+Scripts:AutoloadIon-Pvslt:tree:OvenTime:1:120.0
+Scripts:AutoloadIon-Pvslt:tree:OvenCurrent:1:2.8
+Scripts:AutoloadIon-Pvslt:tree:IntTime:1:1000.0
+Scripts:AutoloadIon-Pvslt:tree:WaitTime:1:15.0
+Scripts:AutoloadIon-Pvslt:tree:Threshold:1:1500.0
+Scripts:AutoloadIon-Pvslt:tree:Freq422:1:710.96302
+Scripts:AutoloadIon-Pvslt:tree:NumberOfLoads:1:20.0
+Scripts:AutoloadIon2:tree:LoadingTime:1:10.0
+Scripts:AutoloadIon2:tree:NumberOfLoads:1:10.0
+Scripts:AutoloadIon2:tree:OvenTime:1:120.0
+Scripts:AutoloadIon2:tree:OvenCurrent:1:2.8
+Scripts:AutoloadIon2:tree:IntTime:1:1000.0
+Scripts:AutoloadIon2:tree:WaitTime:1:15.0
+Scripts:AutoloadIon2:tree:Threshold:1:1500.0
+Scripts:AutoloadIon2:tree:Freq422:1:710.96304
+Scripts:AutoloadIon2:tree:DoScan422:1:1.0

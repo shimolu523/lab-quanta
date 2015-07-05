@@ -1,0 +1,14 @@
+BlueSet =17000. 
+BlueGain = 0.05
+CavGain = 0.02
+CavFWHM = 0.128
+CavLockThreshold = 0.10
+MonoLaserLockThreshold_421 = 0.18
+MonoLaserLockThreshold_1091 = 0.105
+MonoLaserLockThreshold_674 = 0.2
+MonoLaserLockThreshold_1033 = 0.05
+ProbeGain =0.024 #0.24 # 1.2
+IonGain = 0.5
+IonPos1 = -5.58
+IonPos2 = 0.
+print "Constants loaded!"

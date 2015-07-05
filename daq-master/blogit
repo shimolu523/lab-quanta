@@ -1,0 +1,519 @@
+#!/usr/bin/perl
+# 
+# File:   blogit
+# Date:   28-mar-05
+# Author: I. Chuang <ichuang@mit.edu>
+#
+# Perl program to add content to a movable type blog
+#
+# This is a do-it-all blogging program, which can create new entries,
+# append text to entries, and append files to entries.
+#
+# Usage: blogit [-blogid num] [-entryid num] [-append] [-rebuild] [-title]
+#               [-extended]
+#               [-text text] [-listblogs] [-list5entries] [-copy]
+#
+# 28-Apr-05 ILC: added -copy functionality
+
+my($MT_DIR,$BLOG_ID,$AUTHOR_ID,$ENCODE,$CATEGORY,$PING); 
+my($www,$datadir,$user,$BIN);
+
+BEGIN {
+
+#############################
+# Settings:
+
+$user = "ionsearch";
+$www = "/~$user/MT";
+$datadir = "/home/$user/WWW/MT/data";
+$MT_DIR = "/home/$user/WWW/cgi-bin";
+$BLOG_ID = 1;
+$CATEGORY = 7;		# library category
+$PING = 0;
+$BIN = "/home/blog/bin";	# blog executables directory
+
+#############################
+
+}
+use strict;
+use lib "/home/$user/WWW/cgi-bin/lib";
+use lib "/home/$user/WWW/cgi-bin/extlib";
+use CGI qw{:standard};
+use MT;
+use MT::Entry;
+use MT::Blog;
+use MT::Placement;
+use MT::Image;
+# use Jcode;
+$|=1; # buffering
+
+# date-time stamp
+chomp(my $dt = `date +"%Y%m%d-%H%M%S"`);
+
+# parse arguments (get blogid and optional entryid)
+
+my($blogid,$entryid,$appendflag,$rebuildflag,$entrytitle,$copyflag);
+my($entry, $entrytext, $newtext, $cmd, $extendedflag);
+my($centrytext,$cextendedtext,$centryid,$cblogid,$cdt);
+
+if($#ARGV<0){
+# print usage
+    print "Usage: blogit [-blogid num] [-entryid num] [-append] [-rebuild] \n";
+    print "                            [-title entry_title] [-text entry_text]\n";
+    print "                            [-extended] [-copy]\n";
+    print "                            [file1] [file2] ...\n";
+    print "       If no blogid or entryid are given, then you will be given a list.\n";
+    print "       To create a new entry, give an entry title as an argument\n";
+    print "       The special entryid number -1 makes the program use the most recent entry\n";
+    print "\n";
+    print "       -rebuild is generally not necessary (we're using dynamic blogs)\n";
+    print "       -extended appends the material to the extended entry\n";
+    print "\n";
+    print "       -listblogs and -list5entries may also be given\n";
+    print "\n";
+    print "       -copy will prompt user for blogid and entryid to copy\n";
+    exit();
+}
+
+while ($_=$ARGV[0],/^-/) {
+    shift;
+    /^-blogid$/ && ($blogid = shift, next);
+    /^-entryid$/ && ($entryid = shift, next);
+    /^-title$/ && ($entrytitle = shift, next);
+    /^-extended$/ && ($extendedflag = 1, next);
+    /^-text$/ && ($newtext = shift, next);
+    /^-copy$/ && ($copyflag = 1, next);
+    /^-append$/ && ($appendflag = 1, next);
+    /^-rebuild$/ && ($rebuildflag = 1, next);
+    /^-listblogs$/ && ($cmd = "listblogs", next);
+    /^-list5entries$/ && ($cmd = "list5entries", next);
+    die "$0: Invalid option $_\n";
+}
+
+# open movable type master object
+my $MT = MT->new( Config => "$MT_DIR/mt.cfg" ) or die MT->errstr;
+
+# determine author_id
+chomp(my $me = `whoami`);
+my $author = MT::Author->load({name => $me});
+if (not $author){
+    print "You ($me) are not an authorized blog author - aborting\n";
+    print "(your username should match your blog author name)\n";
+    exit();
+}else{
+    $AUTHOR_ID = $author->id;
+    my $name = $author->name;
+    print "Welcome to blogit.  You are $name (authorid=$AUTHOR_ID)\n";
+}
+
+# if we are processing a special command (eg listblogs, list5entries) do it now
+if($cmd ne ""){
+    if($cmd eq "listblogs"){
+	print "Avaialable blogs: \n";
+	my @blogs = MT::Blog->load;
+	for my $blog (@blogs) {
+	    my $blog_id = $blog->id;
+	    my $description = $blog->description;
+	    my $name = $blog->name;
+	    
+	    print "  [$blog_id] $name\n";
+	}
+    }
+    if($cmd eq "list5entries"){
+	if($blogid==""){
+	    print "Can't list entries - must give blogid\n";
+	    exit();
+	}
+	my $theblog = MT::Blog->load($blogid);
+	my $blogname = $theblog->name;
+	print "Last 5 entries in blog '$blogname': \n";
+	my $iter = MT::Entry->load_iter({ blog_id => $blogid }, 
+	                                { 'sort' => 'created_on', 
+					      direction => 'descend',
+					      limit => 5});
+	my $firstid;
+	while ($entry = $iter->()) {
+	    my $entryid = $entry->id;
+	    my $title = $entry->title;
+	    if(not $firstid){
+		$firstid = $entryid;
+	    }
+	    print "  [$entryid] $title\n";
+	}
+    }
+    exit(0);
+}
+
+# copy entry from user-prompted blogid and entryid
+if ($copyflag){
+    print "You have asked to copy an entry.\n";
+    print "Avaialable blogs: \n";
+    my @blogs = MT::Blog->load;
+    for my $blog (@blogs) {
+	my $blog_id = $blog->id;
+	my $description = $blog->description;
+	my $name = $blog->name;
+    
+	print "  [$blog_id] $name\n";
+    }
+    $cblogid = '';
+    while ($cblogid eq ''){
+	print "Enter one blog id number (for entry to copy): ";
+	chomp($cblogid = <STDIN>);
+    }
+    print "source blogid = $cblogid\n";
+
+    my $ctheblog = MT::Blog->load($cblogid);
+    my $cblogname = $ctheblog->name;
+    my $iter = MT::Entry->load_iter({ blog_id => $cblogid },
+	{ 'sort' => 'created_on', 
+	      direction => 'descend',
+	      limit => 200});
+    $centryid = '';
+    my $count = 0;
+
+    print "Last 5 entries in blog '$cblogname': \n";
+    while ($centryid eq '' ){
+	
+	$count = 0;
+	while ($count < 5) {
+	    $entry = $iter->();
+	    if ($entry){
+		my $entryid = $entry->id;
+		my $title = $entry->title;
+		print "  [$entryid] $title\n";
+	    }
+	    $count += 1;
+	}
+	print "Enter id number of one entry to append to [or enter to list next 5]: ";
+	chomp($centryid = <STDIN>);
+    }
+    print "entryid = $centryid\n";
+
+    # now extract the entry data 
+    
+    my $centry = MT::Entry->load($centryid);
+    $centrytext = $centry->text();
+    $cextendedtext = $centry->text_more();
+
+    $entrytitle = $centry->title();
+    $cdt = $centry->created_on();
+    
+    print "Now select where to copy this entry to.\n";
+}
+
+# ask for blog id if not given as argument
+if($blogid==""){
+    print "Avaialable blogs: \n";
+    my @blogs = MT::Blog->load;
+    for my $blog (@blogs) {
+	my $blog_id = $blog->id;
+	my $description = $blog->description;
+	my $name = $blog->name;
+    
+	print "  [$blog_id] $name\n";
+    }
+    $blogid = '';
+    while ($blogid eq ''){
+	print "Enter one blog id number: ";
+	chomp($blogid = <STDIN>);
+    }
+    print "blogid = $blogid\n";
+}
+
+my $theblog = MT::Blog->load($blogid);
+my $blogname = $theblog->name;
+
+if (not $appendflag){
+# creating new entry: ask for entry title (if not already given)
+
+    if($entrytitle eq ""){
+	print "Creating new entry - enter title (hit return to append instead): ";
+	chomp($entrytitle = <STDIN>);
+    }
+    if($entrytitle ne ''){
+	$entry = MT::Entry->new;
+	$entry->blog_id($blogid);
+	$entry->author_id($AUTHOR_ID);
+	$entry->status(MT::Entry::RELEASE());
+	$entry->allow_comments($theblog->allow_comments_default);
+	$entry->convert_breaks($theblog->convert_paras);
+	$entry->category_id($CATEGORY);
+	$entry->title($entrytitle);
+	$entry->allow_pings($PING);
+	$entry->category_id($CATEGORY);
+	$entry->save();
+	$entryid = $entry->id;
+    }else{
+	$appendflag = 1;
+    }
+}
+
+# ask for entry id if appending, and no id was given
+if($appendflag){
+
+    if(not $entryid){
+	print "Last 5 entries in blog '$blogname': \n";
+	my $iter = MT::Entry->load_iter({ blog_id => $blogid }, 
+	                                { 'sort' => 'created_on', 
+					      direction => 'descend',
+					      limit => 5});
+	my $firstid;
+	while ($entry = $iter->()) {
+	    my $entryid = $entry->id;
+	    my $title = $entry->title;
+	    if(not $firstid){
+		$firstid = $entryid;
+	    }
+	    print "  [$entryid] $title\n";
+	}
+	print "Enter id number of one entry to append to [default $firstid]: ";
+	chomp($entryid = <STDIN>);
+	if($entryid eq ''){
+	    $entryid = $firstid;
+	}
+	print "entryid = $entryid\n";
+    }
+    
+    if($entryid<0){	# negative entry id - use most recent one instead
+	$entry = MT::Entry->load({ blog_id => $blogid }, 
+                        	 { 'sort' => 'created_on', 
+				       direction => 'descend',
+				       limit => 1});
+	$entryid = $entry->id;
+	my $title = $entry->title;
+	print "Appending to entry $entryid, '$title'\n";
+    }
+
+    $entry = MT::Entry->load($entryid);
+    if (not $extendedflag){
+	$entrytext = $entry->text();
+    }else{
+	$entrytext = $entry->text_more();
+    }
+}
+
+# special processing if we're copying an existing entry
+if ($copyflag){
+    $entrytext = $entry->text();
+    my $extendedtext = $entry->text_more();
+    
+    $entry->text($entrytext . $centrytext);
+    $entry->text_more($extendedtext . $cextendedtext);
+    $entry->created_on($cdt);
+    $entry->save();
+
+    my $ntlen = length($centrytext);
+    my $ntlen2 = length($cextendedtext);
+    print "Copied $ntlen bytes of text ($ntlen2 extended) from blog $cblogid entry $centryid (dt: $cdt) to blog $blogid entry $entryid\n";
+    exit(0);
+}
+
+# if no other arguments were given, then get entry text
+# and update entry text
+
+if($#ARGV<0){
+    
+    if ($newtext eq ""){	# get newtext, unless was given on command line
+	my $line;
+	print "Enter text for entry (end with single period on line):\n";
+    
+	if ($entrytext ne ""){	# add newline if there was already some text
+	    $newtext .= "\n";
+	}
+
+	while($line ne "."){
+	    chomp($line = <STDIN>);
+	    if ($line ne "."){
+		$newtext .= "$line\n";
+	    }
+	}
+    }
+    if (not $extendedflag){
+	$entry->text($entrytext . $newtext);
+    }else{
+	$entry->text_more($entrytext . $newtext);
+    }
+    $entry->save();
+    my $ntlen = length($newtext);
+    if (not $extendedflag){
+	print "Done.  Added $ntlen character text to entry $entryid.\n";
+    }else{
+	print "Done.  Added $ntlen character text to extended entry $entryid.\n";
+    }
+
+}else{
+
+# arguments were given on the command line: assume they were files to add
+
+    my @dflist = @ARGV;
+    my $toappend = "";
+
+    if ($newtext ne ""){	# if text was given as argument, add it first
+	$toappend .= $newtext;
+    }
+
+    for (@dflist){
+
+	my $datafn = $_;
+	my $myfn = '';
+
+	# add date-time prefix? only if it doesn't already exist
+	chomp(my $fnbase = `basename $datafn`);
+	if ( $fnbase =~ /^\d\d\d\d\d\d\d\d-\d\d\d\d.*$/ ){
+	    # already has dt stamp
+	    $myfn = $fnbase;
+	}else{
+	    $myfn = "$dt-" . $fnbase;
+	}
+
+	if ( $datafn =~ /^(.*)\.([^.]*)$/i ) {
+	    my ($prefix, $suffix) = ( $1, $2 );
+	    $prefix =~ s/[^\w\d]/_/g;
+	    $suffix =~ s/[^\w\d]/_/g;
+	    
+	    # some crude security
+	    if ($suffix =~ /(?:php|pl|cgi|phtml|asp|jsp|cfm|py)/){
+		$myfn = "$myfn.txt";
+	    }
+	}
+
+	# copy data file to WWW
+	
+	my $newfn = "$datadir/$myfn";
+	`cp $datafn $newfn`;
+	`chmod og+r $newfn`;
+	# get file size
+	my $fs = int((stat($newfn))[7]/1000);
+	
+	# construct URL
+    
+	my $url = "$www/data/$myfn";
+	my $entrycontents = "<a href=\"$url\">$myfn</a>\n";
+
+	# special cases - is the file an image?  (if so, make a thumbnail)
+	if ($datafn =~ /\.(jpg|gif|JPG|GIF|png|PNG|tif|TIF)$/) {
+	    my $img = MT::Image->new( Filename => $newfn );
+
+	    # only make thumbnail if image not already small
+	    my $curw = $img->{width};
+	    my $curh = $img->{height};
+	    if($curw>240 or $curh>180){
+		my($blob, $w, $h) = $img->scale( Width => 200 );
+		my $imagefn = "$datadir/$myfn-thumb.jpg";
+		open FH, ">$imagefn" or die $!;
+		binmode FH;
+		print FH $blob;
+		close FH;
+		# print "h=$h, w=$w\n";
+		$entrycontents = "<table><tr><td><a href=\"$url\"><img src=\"$www/data/$myfn-thumb.jpg\" width=\"$w\" height=\"$h\"></img></a></td><td>$entrycontents</td><td>($fs kb)</td></tr></table>";
+	    }else{
+		$entrycontents = "<table><tr><td><a href=\"$url\"><img src=\"$www/data/$myfn\" width=\"$curw\" height=\"$curh\"></img></a></td><td>$entrycontents</td><td>($fs kb)</td></tr></table>";
+	    }
+	}
+	
+	# special cases - is the file a dxf?  (if so, make a PNG image thumbnail)
+	if ($datafn =~ /\.(dxf)$/) {
+	    `$BIN/dxf2png.py $newfn`;	# convert dxf to png
+	    my $pngfn = $myfn;
+	    $pngfn =~ s/\.dxf/.png/;
+	    $entrycontents = "<table><tr><td><a href=\"$www/data/$myfn\"><img src=\"$www/data/$pngfn\"></img></a></td><td>$entrycontents</td><td>($fs kb)</td></tr></table>";
+	}
+	
+	# special cases - is the file a fits?  (if so, make a PNG image thumbnail)
+	if ($datafn =~ /\.(fit)$/) {
+	    my $pngfn = $myfn;
+	    $pngfn =~ s/\.fit/.png/;
+	    `fitstopnm $datafn | pnmtopng > $datadir/$pngfn`;	# convert fit to png
+ 	    $entrycontents = "<table><tr><td><a href=\"$www/data/$myfn\"><img src=\"$www/data/$pngfn\"></img></a></td><td>$entrycontents</td><td>($fs kb)</td></tr></table>";
+	}
+	
+	# special cases - is the file an ps?  (if so, make a thumbnail, and pdf)
+	if ($datafn =~ /\.(ps|PS)$/) {
+	    `$BIN/ps2pdf $newfn`;	# convert eps to pdf
+	    my $pdffn = $myfn;
+	    $pdffn =~ s/\.(ps|PS)/.pdf/;
+	    `$BIN/pstojpg $newfn`;	# convert to jpg using gs
+	    my $jpgfn = $newfn;
+	    $jpgfn =~ s/\.(ps|PS)/.jpg/;
+	    my $img = MT::Image->new( Filename => $jpgfn );
+	    my($blob, $w, $h) = $img->scale( Width => 100 );
+	    my $imagefn = "$datadir/$myfn-thumb.jpg";
+	    open FH, ">$imagefn" or die $!;
+	    binmode FH;
+	    print FH $blob;
+	    close FH;
+	    # print "h=$h, w=$w\n";
+	    $entrycontents = "<table><tr><td><a href=\"$www/data/$pdffn\"><img src=\"$www/data/$myfn-thumb.jpg\" width=\"$w\" height=\"$h\"></img></a></td><td>$entrycontents</td><td>($fs kb)</td></tr></table>";
+	}
+	
+	# special cases - is the file an eps?  (if so, make a thumbnail, and pdf)
+	if ($datafn =~ /\.(eps|EPS)$/) {
+	    `epstopdf $newfn`;	# convert eps to pdf
+	    my $pdffn = $myfn;
+	    $pdffn =~ s/\.eps/.pdf/;
+	    `pstojpg $newfn`;	# convert to jpg using gs
+	    my $jpgfn = $newfn;
+	    $jpgfn =~ s/\.eps/.jpg/;
+	    my $img = MT::Image->new( Filename => $jpgfn );
+	    my($blob, $w, $h) = $img->scale( Width => 100 );
+	    my $imagefn = "$datadir/$myfn-thumb.jpg";
+	    open FH, ">$imagefn" or die $!;
+	    binmode FH;
+	    print FH $blob;
+	    close FH;
+	    # print "h=$h, w=$w\n";
+	    $entrycontents = "<table><tr><td><a href=\"$www/data/$pdffn\"><img src=\"$www/data/$myfn-thumb.jpg\" width=\"$w\" height=\"$h\"></img></a></td><td>$entrycontents</td><td>($fs kb)</td></tr></table>";
+	}
+	
+	# special cases - is the file a pdf?  (if so, make a thumbnail)
+	if ($datafn =~ /\.(pdf|PDF)$/) {
+	    `pdfthumb $newfn`;	# convert pdf to jpg
+	    my $jpgfn = $newfn;
+	    $jpgfn =~ s/\.pdf/.jpg/;
+	    my $img = MT::Image->new( Filename => $jpgfn );
+	    my($blob, $w, $h) = $img->scale( Width => 100 );
+	    my $imagefn = "$datadir/$myfn-thumb.jpg";
+	    open FH, ">$imagefn" or die $!;
+	    binmode FH;
+	    print FH $blob;
+	    close FH;
+	    # print "h=$h, w=$w\n";
+	    $entrycontents = "<table><tr><td><a href=\"$www/data/$myfn\"><img src=\"$www/data/$myfn-thumb.jpg\" width=\"$w\" height=\"$h\"></img></a></td><td>$entrycontents</td><td>($fs kb)</td></tr></table>";
+	}
+	
+	# special cases - is the file an avi?  (if so, make an animated gif clip)
+	if ($datafn =~ /\.avi$/) {
+	    `$BIN/avi2gifclip $newfn`;	# convert avi to gif
+	    my $giffn = $myfn;
+	    $giffn =~ s/\.avi/.gif/;
+	    $entrycontents = "<table><tr><td><a href=\"$www/data/$myfn\"><img src=\"$www/data/$giffn\"></img></a></td><td>$entrycontents</td><td>($fs kb)</td></tr></table>";
+	}
+	
+	$toappend .= "\n$entrycontents";
+	print "Added $datafn\n";
+    }
+    
+    # update MT entry
+    
+    if (not $extendedflag){
+	my $contents = $entry->text();
+	$contents .= "$toappend";
+	$entry->text($contents);
+    }else{
+	my $contents = $entry->text_more();
+	$contents .= "$toappend";
+	$entry->text_more($contents);
+    }
+    $entry->save();
+    #print "contents: " . $entry->text() . "\n";
+}
+
+if($rebuildflag){
+    $MT->rebuild(BlogID => $blogid)
+	or die $MT->errstr;
+}
+
+exit();
+
+#-----------------------------------------------------------------------------

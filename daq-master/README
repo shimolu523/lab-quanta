@@ -1,0 +1,8 @@
+This branch of GUI contains possibly slow and buggy, modernizing changes to the DAQ GUI.
+
+See wiki for description:
+https://quanta.mit.edu/wiki
+
+Daq was written a long long time ago by someone.
+
+This branch refers to the master copy of daq. This copy should be non-specific to the experiments and be kept up to date with any improvements to daq

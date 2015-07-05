@@ -1,0 +1,11 @@
+IonBrightness =10
+SamplesPerPoint = 100
+RamseyGain =5e-5  # 10e-5
+BlueGain = 0.001
+RabiGain = 1.e-4
+LockSCLoops = 0
+LockRamTime = 20
+LockRabiFlops = 10.5
+RabiEveryCycle = 3
+CavTransThreshold = 1
+print "Constants loaded!"
